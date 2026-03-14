@@ -123,26 +123,64 @@ const ROLE_CONFIG = {
     coreAbilities: [
       "Front-line martial tuned for sustained melee pressure."
     ],
+    defaultActions: [
+      {
+        name: "Reactive Strike",
+        actionType: "reaction",
+        category: "offensive",
+        description:
+          "Trigger: A creature within reach uses a manipulate action, makes a ranged attack, or leaves a square during a move action it is using. The warrior lashes out with a punishing melee strike.",
+        traits: ["fighter"],
+        img: "icons/svg/sword.svg"
+      }
+    ],
     abilityOptions: [
       {
         value: "shield-wall",
         label: "Shield Wall",
         description: "Tight defensive posture that hardens the front line.",
         notes: "Shield Wall grants an extra point of AC while the warrior braces.",
-        modifiers: { ac: 1 }
+        modifiers: { ac: 1 },
+        action: {
+          name: "Shield Wall",
+          actionType: "action",
+          category: "defensive",
+          actions: 1,
+          description: "The warrior raises their shield and sets their stance, gaining reinforced cover until the start of their next turn.",
+          traits: ["stance"],
+          img: "icons/equipment/shield/heater-steel-segmented.webp"
+        }
       },
       {
         value: "combat-grab",
         label: "Combat Grab",
         description: "Locks enemies in place after a solid hit.",
-        notes: "Combat Grab lets the warrior keep prey pinned in melee."
+        notes: "Combat Grab lets the warrior keep prey pinned in melee.",
+        action: {
+          name: "Combat Grab",
+          actionType: "action",
+          category: "offensive",
+          actions: 1,
+          description: "The warrior follows a strike with a crushing grab that keeps the foe from slipping away.",
+          traits: ["attack"],
+          img: "icons/skills/melee/unarmed-punch-fist-yellow.webp"
+        }
       },
       {
         value: "brutal-swing",
         label: "Brutal Swing",
         description: "A punishing opening hit with extra impact.",
         notes: "Brutal Swing adds extra force to the warrior's opening strike.",
-        modifiers: { damageBonus: 2 }
+        modifiers: { damageBonus: 2 },
+        action: {
+          name: "Brutal Swing",
+          actionType: "action",
+          category: "offensive",
+          actions: 2,
+          description: "The warrior commits fully to a devastating attack, rolling extra weapon damage on a hit.",
+          traits: ["attack"],
+          img: "icons/weapons/swords/greatsword-guard-gold.webp"
+        }
       }
     ]
   },
@@ -241,26 +279,64 @@ const ROLE_CONFIG = {
     coreAbilities: [
       "Mobile ranged attacker built to keep distance and angle for clean shots."
     ],
+    defaultActions: [
+      {
+        name: "Skirmishing Step",
+        actionType: "action",
+        category: "interaction",
+        actions: 1,
+        description: "The archer Steps and lines up a shot, ignoring the usual awkwardness of firing on the move.",
+        traits: ["move"],
+        img: "icons/skills/movement/feet-winged-boots-brown.webp"
+      }
+    ],
     abilityOptions: [
       {
         value: "hunters-aim",
         label: "Hunter's Aim",
         description: "Steady aim that sharpens the opening shot.",
         notes: "Hunter's Aim improves the archer's first ranged attack on a target.",
-        modifiers: { attackBonus: 1 }
+        modifiers: { attackBonus: 1 },
+        action: {
+          name: "Hunter's Aim",
+          actionType: "action",
+          category: "offensive",
+          actions: 2,
+          description: "The archer steadies their breathing and releases a carefully placed ranged attack with increased accuracy.",
+          traits: ["attack", "concentrate"],
+          img: "icons/weapons/bows/longbow-gold.webp"
+        }
       },
       {
         value: "pinning-shot",
         label: "Pinning Shot",
         description: "Shots that slow or root enemies in place.",
-        notes: "Pinning Shot makes it harder for targets to escape the archer's kill zone."
+        notes: "Pinning Shot makes it harder for targets to escape the archer's kill zone.",
+        action: {
+          name: "Pinning Shot",
+          actionType: "action",
+          category: "offensive",
+          actions: 2,
+          description: "A well-placed arrow hinders the target's movement and makes retreat more dangerous.",
+          traits: ["attack"],
+          img: "icons/skills/ranged/arrow-flying-white-blue.webp"
+        }
       },
       {
         value: "evasive-step",
         label: "Evasive Step",
         description: "Quick footwork after attacking.",
         notes: "Evasive Step gives the archer extra room to reposition safely.",
-        modifiers: { speed: 5, saves: { reflex: 1 } }
+        modifiers: { speed: 5, saves: { reflex: 1 } },
+        action: {
+          name: "Evasive Step",
+          actionType: "action",
+          category: "defensive",
+          actions: 1,
+          description: "The archer slides out of danger after attacking, making it harder to pin them down.",
+          traits: ["move"],
+          img: "icons/skills/movement/arrow-upward-blue.webp"
+        }
       }
     ]
   },
@@ -341,27 +417,64 @@ const ROLE_CONFIG = {
     coreAbilities: [
       "Arcane caster with a spell package pulled from the SRD compendium."
     ],
+    defaultActions: [
+      {
+        name: "Arcane Ward",
+        actionType: "action",
+        category: "defensive",
+        actions: 1,
+        description: "The mage whips up a quick ward of force that blunts the next incoming threat.",
+        traits: ["arcane", "concentrate"],
+        img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp"
+      }
+    ],
     abilityOptions: [
       {
         value: "arcane-ward",
         label: "Arcane Ward",
         description: "A layered force shield that catches glancing blows.",
         notes: "Arcane Ward hardens the mage with a floating layer of force.",
-        modifiers: { ac: 1 }
+        modifiers: { ac: 1 },
+        action: {
+          name: "Arcane Ward Pulse",
+          actionType: "action",
+          category: "defensive",
+          actions: 1,
+          description: "The mage reinforces their ward, gaining a brief edge against the next attack.",
+          traits: ["arcane", "concentrate"],
+          img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp"
+        }
       },
       {
         value: "spell-burst",
         label: "Spell Burst",
         description: "A sharper offensive casting profile.",
         notes: "Spell Burst pushes the mage's offensive spell output higher.",
-        modifiers: { spellDC: 1, spellAttack: 1 }
+        modifiers: { spellDC: 1, spellAttack: 1 },
+        action: {
+          name: "Spell Burst",
+          actionType: "action",
+          category: "offensive",
+          actions: 2,
+          description: "The mage overchannels power into their next spell, increasing its pressure or damage.",
+          traits: ["arcane", "concentrate"],
+          img: "icons/magic/fire/projectile-fireball-embers-yellow.webp"
+        }
       },
       {
         value: "countermeasure",
         label: "Countermeasure",
         description: "Prepared to unmake hostile magic.",
         notes: "Countermeasure gives the mage a ready answer to enemy spells.",
-        modifiers: { saves: { will: 1 } }
+        modifiers: { saves: { will: 1 } },
+        action: {
+          name: "Countermeasure",
+          actionType: "reaction",
+          category: "defensive",
+          description: "Trigger: A creature the mage can see casts a spell. The mage twists their own magic into the effect, disrupting or weakening it.",
+          traits: ["arcane"],
+          img: "icons/magic/symbols/runes-star-pentagon-magenta.webp"
+        }
       }
     ]
   },
@@ -451,27 +564,65 @@ const ROLE_CONFIG = {
     coreAbilities: [
       "Divine support caster with healing, protection, and righteous pressure."
     ],
+    defaultActions: [
+      {
+        name: "Healing Pulse",
+        actionType: "action",
+        category: "defensive",
+        actions: 2,
+        description: "The priest releases a wave of restorative energy that steadies allies and closes minor wounds.",
+        traits: ["divine", "healing"],
+        img: "icons/magic/life/cross-beam-green.webp"
+      }
+    ],
     abilityOptions: [
       {
         value: "healing-burst",
         label: "Healing Burst",
         description: "A pulse of restorative divine energy.",
         notes: "Healing Burst lets the priest stabilize the fight around them.",
-        modifiers: { hpFlat: 10 }
+        modifiers: { hpFlat: 10 },
+        action: {
+          name: "Healing Burst",
+          actionType: "action",
+          category: "defensive",
+          actions: 2,
+          description: "A stronger wave of healing pours through nearby allies, pushing them back into the fight.",
+          traits: ["divine", "healing"],
+          img: "icons/magic/life/heart-area-circle-green.webp"
+        }
       },
       {
         value: "blessed-ward",
         label: "Blessed Ward",
         description: "Protective prayer woven into every defense.",
         notes: "Blessed Ward wraps allies and the priest in a defensive benediction.",
-        modifiers: { ac: 1 }
+        modifiers: { ac: 1 },
+        action: {
+          name: "Blessed Ward",
+          actionType: "action",
+          category: "defensive",
+          actions: 1,
+          description: "The priest speaks a brief prayer that shields a creature with a shimmering holy ward.",
+          traits: ["divine"],
+          img: "icons/magic/holy/shield-barrier-glowing-cross.webp"
+        }
       },
       {
         value: "divine-judgment",
         label: "Divine Judgment",
         description: "A harsher edge on offensive miracles.",
         notes: "Divine Judgment sharpens the priest's offensive spellcasting.",
-        modifiers: { spellDC: 1, spellAttack: 1 }
+        modifiers: { spellDC: 1, spellAttack: 1 },
+        action: {
+          name: "Divine Judgment",
+          actionType: "action",
+          category: "offensive",
+          actions: 2,
+          description: "The priest calls down a focused sentence of divine power on a foe within sight.",
+          traits: ["divine"],
+          img: "icons/magic/holy/angel-winged-sword-orange.webp"
+        }
       }
     ]
   }
@@ -598,6 +749,16 @@ function getSelectedAbilityOptions(role, abilityMap = {}) {
   return getRoleData(role).abilityOptions.filter((option) => abilityMap[option.value]);
 }
 
+function getSpecialActions(config) {
+  const normalized = normalizeConfig(config);
+  const roleData = getRoleData(normalized.role);
+  const selectedAbilityOptions = getSelectedAbilityOptions(normalized.role, normalized.abilities);
+  return [
+    ...(roleData.defaultActions ?? []),
+    ...selectedAbilityOptions.map((option) => option.action).filter(Boolean)
+  ];
+}
+
 function roleAbilityMods(level, role) {
   const step = scalingStep(level);
   const base = ROLE_CONFIG[role].abilities;
@@ -614,7 +775,6 @@ function roleAbilityMods(level, role) {
 function computeStats(config) {
   const roleData = ROLE_CONFIG[config.role];
   const level = config.level;
-  const tier = scalingStep(level);
   const abilityMods = roleAbilityMods(level, config.role);
   const loadout = getSelectedLoadout(config.role, config.loadout);
   const selectedAbilities = getSelectedAbilityOptions(config.role, config.abilities);
@@ -636,7 +796,7 @@ function computeStats(config) {
       will: 5 + level + roleData.saves.will
     },
     attackBonus: 7 + level + roleData.attack,
-    damageBonus: 3 + Math.max(0, level) + roleData.damage + tier,
+    damageBonus: buildBaseDamageBonus(level, roleData),
     spellDC: roleData.tradition ? 17 + level + roleData.spellDC : null,
     spellAttack: roleData.tradition ? 7 + level + roleData.spellDC : null,
     abilityMods,
@@ -683,6 +843,17 @@ function buildSkillProfile(level, role, abilityMods) {
   }
 
   return baseMap;
+}
+
+function buildBaseDamageBonus(level, roleData) {
+  const boundedLevel = Math.max(0, level);
+  let bonus = Math.floor(boundedLevel / 2) + roleData.damage;
+
+  if (boundedLevel >= 15) {
+    bonus += 1;
+  }
+
+  return Math.max(0, bonus);
 }
 
 function applyAdjustments(stats, config) {
@@ -751,11 +922,18 @@ function buildRuneSummary(level, roleData) {
     : "Mundane-grade gear with light magical support.";
 }
 
-function getWeaponPropertyDamageBonus(level) {
-  if (level >= 20) return 3;
-  if (level >= 14) return 2;
-  if (level >= 8) return 1;
-  return 0;
+function getWeaponPropertyDamageBonus(level, strike) {
+  let bonus = level >= 18 ? 2 : level >= 10 ? 1 : 0;
+
+  if (strike.attackType === "ranged") {
+    bonus = Math.max(0, bonus - 1);
+  }
+
+  if (strike.traits.includes("agile")) {
+    bonus = Math.max(0, bonus - 1);
+  }
+
+  return bonus;
 }
 
 function getArmorMagicBonuses(level) {
@@ -773,13 +951,8 @@ function getCasterMagicBonuses(level) {
 }
 
 function applyMagicItemFudge(stats, role, roleData) {
-  const weaponPropertyDamage = getWeaponPropertyDamageBonus(stats.level);
   const armorMagic = getArmorMagicBonuses(stats.level);
   const casterMagic = getCasterMagicBonuses(stats.level);
-
-  if (weaponPropertyDamage) {
-    stats.damageBonus += weaponPropertyDamage;
-  }
 
   if (armorMagic.acBonus) {
     stats.ac += armorMagic.acBonus;
@@ -801,7 +974,7 @@ function applyMagicItemFudge(stats, role, roleData) {
   }
 
   const notes = [];
-  if (weaponPropertyDamage) notes.push(`weapon damage +${weaponPropertyDamage}`);
+  if (stats.level >= 10) notes.push("subtle property-rune damage on weapon strikes");
   if (armorMagic.acBonus) notes.push(`armor value +${armorMagic.acBonus} AC`);
   if (armorMagic.saveBonus) notes.push(`resilient defense +${armorMagic.saveBonus} saves`);
   if (roleData.tradition && casterMagic.spellBonus) notes.push(`focus item +${casterMagic.spellBonus} spellcasting`);
@@ -838,7 +1011,10 @@ function buildStrike(level, strike, stats, index) {
   const diceCount = getWeaponDiceCount(level);
   const agilePenalty = strike.traits.includes("agile") ? 1 : 0;
   const attackBonus = stats.attackBonus - index - agilePenalty;
-  const damage = `${diceCount}d${strike.dieSize}+${stats.damageBonus}`;
+  const propertyDamageBonus = getWeaponPropertyDamageBonus(level, strike);
+  const rangedPenalty = strike.attackType === "ranged" ? 1 : 0;
+  const flatDamage = Math.max(0, stats.damageBonus + propertyDamageBonus - rangedPenalty - agilePenalty);
+  const damage = flatDamage > 0 ? `${diceCount}d${strike.dieSize}+${flatDamage}` : `${diceCount}d${strike.dieSize}`;
   const label = `${strike.name} +${attackBonus}`;
   return {
     ...strike,
@@ -1065,6 +1241,29 @@ function buildMeleeItemSource(strike) {
   };
 }
 
+function buildActionItemSource(action) {
+  return {
+    name: action.name,
+    type: "action",
+    img: action.img ?? "icons/svg/daze.svg",
+    system: {
+      description: { value: `<p>${action.description}</p>`, gm: "" },
+      rules: [],
+      slug: slugify(action.name),
+      publication: buildPublicationData(),
+      actionType: { value: action.actionType ?? "action" },
+      actions: { value: action.actions ?? null },
+      category: action.category ?? "interaction",
+      traits: {
+        rarity: "common",
+        value: action.traits ?? [],
+        otherTags: []
+      }
+    },
+    flags: buildGeneratedFlags()
+  };
+}
+
 function buildPublicationData() {
   return {
     title: "Fast NPC Helper",
@@ -1102,6 +1301,7 @@ export async function buildQuickNPC(config) {
   const stats = computeStats(normalized);
   const actorUpdate = buildActorUpdate(null, normalized, stats);
   const itemSources = stats.strikes.map((strike) => buildMeleeItemSource(strike));
+  const actionSources = getSpecialActions(normalized).map((action) => buildActionItemSource(action));
   const spellBundle = await buildSpellSources(normalized, stats);
 
   return {
@@ -1109,6 +1309,7 @@ export async function buildQuickNPC(config) {
     stats,
     actorUpdate,
     itemSources,
+    actionSources,
     spellBundle
   };
 }
@@ -1137,6 +1338,11 @@ export async function buildPreview(config) {
     strikes: quickNpc.stats.strikes.map((strike) => ({
       label: strike.label,
       damage: `${strike.damage} ${strike.damageType}`
+    })),
+    specialActions: quickNpc.actionSources.map((action) => ({
+      name: action.name,
+      type: action.system.actionType.value,
+      cost: action.system.actions?.value
     })),
     abilities: [...quickNpc.stats.abilitiesText],
     spells: [...quickNpc.spellBundle.previewLines]
@@ -1175,6 +1381,10 @@ export async function applyFastNPCHelperToActor(actor, config) {
   const baseItems = [...quickNpc.itemSources];
   if (baseItems.length) {
     await actor.createEmbeddedDocuments("Item", baseItems);
+  }
+
+  if (quickNpc.actionSources.length) {
+    await actor.createEmbeddedDocuments("Item", quickNpc.actionSources);
   }
 
   if (spellEntry && quickNpc.spellBundle.spellSources.length) {

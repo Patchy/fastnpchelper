@@ -160,6 +160,21 @@ export class FastNPCHelperApp extends FormApplication {
         </div>
 
         <div>
+          <h3>Special Actions</h3>
+          <ul>
+            ${preview.specialActions
+              .map(
+                (action) => `
+                  <li><strong>${this.#escapeHtml(action.name)}</strong> <span>${this.#escapeHtml(
+                    `${action.type}${action.cost ? ` ${action.cost}` : ""}`
+                  )}</span></li>
+                `
+              )
+              .join("")}
+          </ul>
+        </div>
+
+        <div>
           <h3>Abilities</h3>
           <ul>
             ${preview.abilities.map((ability) => `<li>${this.#escapeHtml(ability)}</li>`).join("")}

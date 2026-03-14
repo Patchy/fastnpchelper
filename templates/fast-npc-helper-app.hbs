@@ -111,6 +111,15 @@
       </div>
 
       <div>
+        <h3>Special Actions</h3>
+        <ul>
+          {{#each preview.specialActions}}
+            <li><strong>{{name}}</strong> <span>{{type}}{{#if cost}} {{cost}}{{/if}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div>
         <h3>Abilities</h3>
         <ul>
           {{#each preview.abilities}}
