@@ -1,0 +1,34 @@
+{
+  "id": "fastnpchelper",
+  "title": "Fast NPC Helper",
+  "description": "Adds a Quick NPC wizard to the actor directory for rapidly templating PF2e NPC actors.",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Patchy"
+    }
+  ],
+  "url": "https://github.com/Patchy/fastnpchelper",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system"
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "styles": [
+    "styles/fast-npc-helper.css"
+  ],
+  "manifest": "https://github.com/Patchy/fastnpchelper/releases/latest/download/module.json",
+  "download": "https://github.com/Patchy/fastnpchelper/releases/latest/download/fastnpchelper.zip",
+  "readme": "https://raw.githubusercontent.com/Patchy/fastnpchelper/main/README.md",
+  "license": "https://raw.githubusercontent.com/Patchy/fastnpchelper/main/LICENSE.md"
+}
