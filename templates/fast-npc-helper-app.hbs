@@ -1,0 +1,139 @@
+<form class="fast-npc-helper-form">
+  <header class="fast-npc-helper-header">
+    <div>
+      <h1>Fast NPC Helper</h1>
+      <p>Apply a fast PF2e template to <strong>{{actor.name}}</strong>.</p>
+    </div>
+    <label class="fast-npc-helper-level">
+      <span>Level</span>
+      <input type="number" name="level" min="-1" max="25" value="{{state.level}}" />
+    </label>
+  </header>
+
+  <section class="fast-npc-helper-section">
+    <h2>Role</h2>
+    <div class="fast-npc-helper-role-grid">
+      {{#each roleOptions}}
+        <label class="fast-npc-helper-role {{#if selected}}selected{{/if}}">
+          <input type="radio" name="role" value="{{value}}" {{#if selected}}checked{{/if}} />
+          <span class="fast-npc-helper-role-label">{{label}}</span>
+          <span class="fast-npc-helper-role-description">{{description}}</span>
+        </label>
+      {{/each}}
+    </div>
+  </section>
+
+  <section class="fast-npc-helper-section">
+    <h2>Weapon Package</h2>
+    <div class="fast-npc-helper-option-grid" data-loadout-root>
+      {{#each loadoutOptions}}
+        <label class="fast-npc-helper-option-card {{#if selected}}selected{{/if}}">
+          <input type="radio" name="loadout" value="{{value}}" {{#if selected}}checked{{/if}} />
+          <span class="fast-npc-helper-option-title">{{label}}</span>
+          <span class="fast-npc-helper-option-description">{{description}}</span>
+        </label>
+      {{/each}}
+    </div>
+  </section>
+
+  <section class="fast-npc-helper-section">
+    <h2>Role Abilities</h2>
+    <div class="fast-npc-helper-option-grid" data-abilities-root>
+      {{#each abilityOptions}}
+        <label class="fast-npc-helper-option-card {{#if checked}}selected{{/if}}">
+          <input type="checkbox" name="abilities.{{value}}" {{#if checked}}checked{{/if}} />
+          <span class="fast-npc-helper-option-title">{{label}}</span>
+          <span class="fast-npc-helper-option-description">{{description}}</span>
+        </label>
+      {{/each}}
+    </div>
+  </section>
+
+  <section class="fast-npc-helper-columns">
+    <div class="fast-npc-helper-section">
+      <h2>Boons</h2>
+      <div class="fast-npc-helper-toggle-list">
+        {{#each boonOptions}}
+          <label class="fast-npc-helper-toggle">
+            <input type="checkbox" name="boons.{{value}}" {{#if checked}}checked{{/if}} />
+            <span>
+              <strong>{{label}}</strong>
+              <small>{{description}}</small>
+            </span>
+          </label>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="fast-npc-helper-section">
+      <h2>Flaws</h2>
+      <div class="fast-npc-helper-toggle-list">
+        {{#each flawOptions}}
+          <label class="fast-npc-helper-toggle">
+            <input type="checkbox" name="flaws.{{value}}" {{#if checked}}checked{{/if}} />
+            <span>
+              <strong>{{label}}</strong>
+              <small>{{description}}</small>
+            </span>
+          </label>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="fast-npc-helper-section fast-npc-helper-preview" data-preview-root>
+    <div class="fast-npc-helper-preview-header">
+      <div>
+        <h2>{{preview.heading}}</h2>
+        <p>{{preview.summary}}</p>
+        <p>{{preview.loadout}}</p>
+      </div>
+      <p class="fast-npc-helper-runes">{{preview.runeSummary}}</p>
+    </div>
+
+    <div class="fast-npc-helper-stat-grid">
+      {{#each preview.stats}}
+        <div class="fast-npc-helper-stat">
+          <span class="fast-npc-helper-stat-label">{{label}}</span>
+          <strong>{{value}}</strong>
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="fast-npc-helper-preview-columns">
+      <div>
+        <h3>Strikes</h3>
+        <ul>
+          {{#each preview.strikes}}
+            <li><strong>{{label}}</strong> <span>{{damage}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div>
+        <h3>Abilities</h3>
+        <ul>
+          {{#each preview.abilities}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    {{#if preview.spells.length}}
+      <div class="fast-npc-helper-spells">
+        <h3>Spell Package</h3>
+        <ul>
+          {{#each preview.spells}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+  </section>
+
+  <footer class="fast-npc-helper-footer">
+    <button type="button" class="button" data-action="cancel">Cancel</button>
+    <button type="submit" class="button primary">Apply Template</button>
+  </footer>
+</form>
